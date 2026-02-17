@@ -1,27 +1,27 @@
-public class StreamingService extends Service
-        implements PremiumFeature {
+public class StreamingService extends Service implements PremiumFeature {
+    private boolean premium;
 
-    // TODO: declare premium field
-
-
-    // TODO: constructor
-
+    public StreamingService(String name, int id) {
+        super(name, id);
+        this.premium = false;
+    }
 
     @Override
     public void performService() {
-
-        // TODO:
-        // check if service is active
-        // print different message for premium and normal
-
+        if (!isActive()) {
+            System.out.println(getServiceName() + " is inactive. Cannot stream.");
+            return;
+        }
+        if (premium) {
+            System.out.println("Streaming premium content on " + getServiceName());
+        } else {
+            System.out.println("Streaming standard content on " + getServiceName());
+        }
     }
 
     @Override
     public void upgradeToPremium() {
-
-        // TODO:
-        // set premium = true
-        // print message
-
+        premium = true;
+        System.out.println(getServiceName() + " upgraded to Premium!");
     }
 }
